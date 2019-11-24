@@ -431,6 +431,9 @@ public class LoaderIT extends LoaderBase
     assertThat("error count", listener.getErrorCount(), equalTo(0));
     assertThat("error record count", listener.getErrorRecordCount(), equalTo(0));
 
+    testConnection.createStatement().execute(
+        "alter session set jdbc_query_result_format='ARROW'");
+
     ResultSet rs = testConnection.createStatement().executeQuery(
         String.format("SELECT C1, C4, C3"
                       + " FROM \"%s\" WHERE ID=10001", TARGET_TABLE_NAME));
